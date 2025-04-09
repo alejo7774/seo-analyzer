@@ -79,9 +79,9 @@ Desarrollador de Aplicaciones Multiplataforma
 📃 Licencia
 Este proyecto se distribuye bajo licencia MIT. ¡Úsalo, modifícalo y comparte! 🚀
 
-## 📸 Capturas de pantalla
 
 ## 📸 Capturas de pantalla
+Capturas añadidas abajo 👇
 
 ### 🏁 Pantalla de inicio
 ![Inicio](screenshots/Inicio.png)
