@@ -33,8 +33,8 @@ Este es un proyecto personal desarrollado con **Python + Flask**, que permite an
 
 ## 🧪 Cómo usarlo en local
 
-### 1. Clona el repositorio:
 
+1. Clona el repositorio:
 ```bash
 git clone https://github.com/tu-usuario/seo-analyzer.git
 cd seo-analyzer
