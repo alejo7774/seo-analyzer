@@ -18,11 +18,16 @@ def check_links(soup, base_url):
     internal_links = 0
     external_links = 0
 
+    base_domain = urlparse(base_url).netloc
+
     for link in links:
         href = link.get('href')
         full_url = urljoin(base_url, href)
 
-        if base_url in full_url:
+        if not is_valid_url(full_url):
+            continue
+
+        if urlparse(full_url).netloc == base_domain:
             internal_links += 1
         else:
             external_links += 1
@@ -31,7 +36,7 @@ def check_links(soup, base_url):
             response = requests.head(full_url, timeout=5)
             if response.status_code >= 400:
                 broken_links += 1
-        except:
+        except Exception:
             broken_links += 1
 
     return {
@@ -43,12 +48,15 @@ def check_links(soup, base_url):
 
 def analyze_seo(url):
     try:
+        if not is_valid_url(url):
+            return {"error": "URL inválida"}
+
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         title = soup.title.string if soup.title else "Sin título"
-        meta_desc = soup.find("meta", attrs={"name": "description"})
-        meta_desc = meta_desc["content"] if meta_desc else "Sin descripción"
+        meta_tag = soup.find("meta", attrs={"name": "description"})
+        meta_desc = meta_tag.get("content") if meta_tag and meta_tag.get("content") else "Sin descripción"
 
         h1_tags = [h1.get_text(strip=True) for h1 in soup.find_all("h1")]
         images = soup.find_all("img")
